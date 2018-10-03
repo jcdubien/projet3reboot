@@ -5,20 +5,43 @@
 
 {% block body %}
 
-    <h1>Administration</h1>
+    <h1 style="text-align: center">Administration</h1>
+    <br/>
+
+    <style type="text/css">
+        body {
+        BackGroundColor:grey;
+
+    </style>
 
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <ul>
-                    <li><a href="{{ path('create') }}">Créer un billet</a></li>
-                    <li><a href="{{ path('listpostsbackend') }}">Lister les billets pour édition ou suppression</a></li>
-                    <li><a href="{{ path('moderate') }}">modérer les commentaires</a></li>
 
-                </ul>
+                    <p><a href="{{ path('create_new') }}" class="btn btn-primary">Créer un billet</a></p>
+                    <hr/>
+                    <p><a href="{{ path('list_posts_back_end') }}" class="btn btn-primary">Lister les billets pour édition ou suppression</a></p>
+                    <hr/>
+                    <p><a href="{{ path('moderate') }}" class="btn btn-primary">Modérer les commentaires</a></p>
+
+
             </div>
             <div class="col-sm">
-                <p>commmentaires à modérer</p>
+
+                <ul>
+                    {%  for comment in comments %}
+                        <li>
+                            <strong>{{ comment.author }}</strong>
+                            <p>{{  comment.content }}</p>
+                            <a href={{ path('validate' ,{'id':  comment.id } ) }} class="btn btn-primary">Valider  </a>
+                            <a href={{  path('deletecomment', { 'id' : comment.id })  }} class="btn btn-primary">Supprimer</a>
+                            <hr/>
+                        </li>
+
+                    {%  endfor %}
+
+                </ul>
+
             </div>
 
         </div>

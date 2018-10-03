@@ -6,7 +6,7 @@
 
         <h2>{{ article.title }}</h2>
 
-        <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie Politique</div>
+        <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie {{ article.category.titl }}/div>
 
         <div class="content">
 
@@ -15,6 +15,26 @@
             {{ article.content | raw }}
 
         </div>
+
+        <section id="commentaires">
+
+            {%  for comment in article.comments %}
+            <div id="comment">
+
+                <div id="row">
+                    <div id="col-3">
+                        {{ comment.author }} (<small> {{ comment.createdAt | date('d/m/Y à H:i')}}</small>)
+                    </div>
+                    <div id="col-9">
+                        {{ comment.content }}
+
+                    </div>
+
+                </div>
+            </div>
+
+            {% endfor %}
+        </section>
 
     </article>
 
